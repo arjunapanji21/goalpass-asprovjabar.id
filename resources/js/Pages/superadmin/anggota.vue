@@ -59,10 +59,10 @@
                     <!-- head -->
                     <thead>
                         <tr>
-                            <!-- <th>#</th> -->
-                            <!-- <th class="text-center">Foto</th> -->
-                            <th>No. Anggota</th>
+                            <th>#</th>
+                            <th class="text-center">Foto</th>
                             <th>Nama Lengkap</th>
+                            <th>No. Anggota</th>
                             <th>Klub</th>
                             <th>Umur</th>
                             <th class="text-right">Jumlah Dicetak</th>
@@ -76,11 +76,29 @@
                             :key="index"
                         >
                             <tr class="hover">
-                                <td class="font-bold">
-                                    {{ anggota.kd_kartu }}
+                                <th>
+                                    {{ anggota.id }}
+                                </th>
+                                <td class="text-center">
+                                    <div class="avatar">
+                                        <div
+                                            class="mask mask-squircle w-12 h-12"
+                                        >
+                                            <img
+                                                :src="
+                                                    '/foto_anggota/' +
+                                                    anggota.foto
+                                                "
+                                                alt="Foto Anggota"
+                                            />
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
                                     {{ anggota.nama }}
+                                </td>
+                                <td>
+                                    {{ anggota.kd_kartu }}
                                 </td>
                                 <td>{{ anggota.klub }}</td>
                                 <td>
@@ -155,19 +173,22 @@
                         </template>
                     </tbody>
                 </table>
-                <div class="btn-group flex justify-end pt-5">
-                    <Link
-                        class="btn btn-sm btn-primary bg-base-100 shadow btn-outline"
-                        :class="{ 'btn-active': anggota.active }"
-                        v-for="(anggota, index) in master.anggota.links"
-                        :key="index"
-                        :href="anggota.url"
-                        v-html="anggota.label"
-                    ></Link>
-                </div>
+            </div>
+        </div>
+        <div class="btn-group flex text-right justify-end pt-5">
+            <div class="w-[28rem] md:w-full">
+                <Link
+                    class="btn btn-sm btn-primary bg-base-100 shadow btn-outline"
+                    :class="{ 'btn-active': anggota.active }"
+                    v-for="(anggota, index) in master.anggota.links"
+                    :key="index"
+                    :href="anggota.url"
+                    v-html="anggota.label"
+                ></Link>
             </div>
         </div>
     </div>
+    <div class="pb-20"></div>
 </template>
 <script>
 import moment from "moment";

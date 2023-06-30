@@ -50,7 +50,7 @@ class MainController extends Controller
     }
     public function anggota(Request $request)
     {
-        $anggota = Anggota::orderBy('nama', 'asc')
+        $anggota = Anggota::orderBy('id', 'asc')
             ->where('nik', 'like', "%{$request['search']}%")
             ->orWhere('nama', 'like', "%{$request['search']}%")
             ->orWhere('klub', 'like', "%{$request['search']}%")
@@ -192,16 +192,16 @@ class MainController extends Controller
         $length = strlen($umur);
         $umurangka = substr($umur, $length - 2);
 
-
-
         // Output the modified PDF
         $file_path = public_path('kartu_anggota/') . $umurangka . '-' . $anggota->nama . '.pdf';
 
         $url =  url('kartu_anggota') . '/' . $umurangka . '-' . $anggota->nama . '.pdf';
 
+        $anggota->update([
+            'jml_cetak' => $anggota->jml_cetak + 1
+        ]);
+
         $pdf->Output($file_path, 'F');
-
-
 
         echo '<embed src="' . $url . '" type="application/pdf" width="100%" height="600px" />';
     }
