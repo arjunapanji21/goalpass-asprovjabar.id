@@ -182,7 +182,7 @@
                     :class="{ 'btn-active': anggota.active }"
                     v-for="(anggota, index) in master.anggota.links"
                     :key="index"
-                    :href="anggota.url"
+                    :href="anggota.url + '&search=' + master.search"
                     v-html="anggota.label"
                 ></Link>
             </div>

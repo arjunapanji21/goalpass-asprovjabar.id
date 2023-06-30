@@ -57,10 +57,11 @@ class MainController extends Controller
             ->orWhere('umur', 'like', "%{$request['search']}%")
             ->orWhere('kd_kartu', 'like', "%{$request['search']}%")
             ->orWhere('kota_kab', 'like', "%{$request['search']}%")
-            ->paginate(10);
+            ->paginate(50);
         $master = [
             'title' => 'Anggota',
             'anggota' => $anggota,
+            'search' => $request['search'] != null ? $request['search'] : null,
         ];
         if (auth()->user()->role == "Super Admin") {
             return inertia()->render('superadmin/anggota', compact('master'));
