@@ -24,7 +24,7 @@
                         </div>
                     </div>
                     <div class="text-center">Jumlah Anggota</div>
-                    <div class="text-center text-5xl font-bold">255</div>
+                    <div class="text-center text-5xl font-bold">{{master.anggota}}</div>
                     <div class="card-actions justify-center pt-2">
                         <Link
                             :href="route('anggota')"
@@ -82,6 +82,7 @@ export default {
     layout: layout,
     props: {
         auth: Object,
+        master: Object
     },
 };
 </script>

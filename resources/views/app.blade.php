@@ -7,7 +7,7 @@
         {{-- <title inertia>{{ config('app.name', 'Laravel') }}</title> --}}
 
         <!-- Favicon -->
-        <link rel="icon" type="image/x-icon" href="{{asset('images/logo.png')}}">
+        <link rel="icon" type="image/x-icon" href="{{asset('images/logo_goalpass.png')}}">
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -23,7 +23,7 @@
         @inertia
 
         @env ('local')
-            <script src="http://localhost:8080/js/bundle.js"></script>
+            <script src="{{mix('js/bundle.js')}}"></script>
         @endenv
     </body>
 </html>

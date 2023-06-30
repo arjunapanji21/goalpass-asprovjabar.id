@@ -24,7 +24,7 @@ Route::get('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/auth', [AuthController::class, 'auth'])->name('auth');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-
+Route::get('/cekdata/{kd_kartu}', [MainController::class, 'cekKartu'])->name('anggota.cekdata');
 
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->group(function () {
@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/anggota', [MainController::class, 'anggota'])->name('anggota');
         Route::get('/anggota/baru', [MainController::class, 'anggota_tambah'])->name('anggota.tambah');
         Route::get('/anggota/{kd_kartu}', [MainController::class, 'anggota_profile'])->name('anggota.profile');
+        
+        Route::get('/anggota/cetak/{kd_kartu}', [MainController::class, 'cetakKartu'])->name('anggota.cetak');
+       
         Route::get('/admin', [MainController::class, 'admin'])->name('admin');
     });
 

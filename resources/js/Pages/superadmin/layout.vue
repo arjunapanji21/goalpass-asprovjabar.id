@@ -150,7 +150,7 @@
                         </svg>
                     </a>
                 </li>
-                <li class="mt-auto mb-2">
+                <!-- <li class="mt-auto mb-2">
                     <Link
                         :href="route('logout')"
                         class="tooltip tooltip-right text-base-100 hover:bg-base-100 hover:text-primary"
@@ -169,7 +169,7 @@
                             />
                         </svg>
                     </Link>
-                </li>
+                </li> -->
             </ul>
         </div>
         <div class="w-full">
@@ -178,14 +178,14 @@
                     <div class="navbar-start"></div>
                     <div class="navbar-center">
                         <img
-                            src="../../../../public/images/logo-pssi-jabar.png"
-                            alt="logo.png"
-                            width="80"
+                            src="../../../../public/images/logo_goalpass.png"
+                            alt="logo_goalpass.png"
+                            width="40"
                         />
                     </div>
                     <div class="navbar-end">
-                        <details class="dropdown dropdown-end">
-                            <summary
+                        <div class="dropdown dropdown-end">
+                            <label tabindex="0"
                                 class="btn btn-sm text-xs btn-ghost text-primary normal-case gap-1"
                             >
                                 {{ auth.user.firstname }}
@@ -202,9 +202,9 @@
                                         d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"
                                     />
                                 </svg>
-                            </summary>
-                            <ul
-                                class="p-1 shadow menu dropdown-content bg-primary text-primary-content rounded-box w-32"
+                            </label>
+                            <ul tabindex="0"
+                                class="p-1 shadow menu dropdown-content z-[1] bg-primary text-primary-content rounded-box w-32"
                             >
                                 <li>
                                     <Link :href="route('logout')">
@@ -224,7 +224,7 @@
                                     </Link>
                                 </li>
                             </ul>
-                        </details>
+                        </div>
                     </div>
                 </div>
                 <div class="p-4 max-w-6xl mx-auto"><slot></slot></div>

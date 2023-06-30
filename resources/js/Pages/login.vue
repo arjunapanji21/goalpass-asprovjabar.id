@@ -6,9 +6,9 @@
         <div class="hero-content flex-col md:flex-row-reverse">
             <div class="text-center md:text-left">
                 <img
-                    src="../../../public/images/logo.png"
-                    alt="logo.png"
-                    class="mx-auto p-4 w-1/2 md:w-5/6"
+                    src="../../../public/images/logo_goalpass.png"
+                    alt="logo_goalpass.png"
+                    class="mx-auto max-w-md p-10"
                 />
             </div>
             <div
@@ -38,7 +38,7 @@
                         />
                     </div>
                     <div class="form-control mt-6">
-                        <button @click="btn_submit()" class="btn btn-primary bg-[#28166F] text-primary-100">Masuk</button>
+                        <button @click="btn_submit()" class="btn btn-primary">Masuk</button>
                     </div>
                     <label class="label justify-center">
                         <a href="#" class="label-text-alt link link-hover"
