@@ -194,9 +194,9 @@ class MainController extends Controller
         $umurangka = substr($umur, $length - 2);
 
         // Output the modified PDF
-        $file_path = public_path('kartu_anggota/') . $umurangka . '-' . $anggota->nama . '.pdf';
+        $file_path = public_path('kartu_anggota/') . $umurangka . '-' . $anggota->no_xls . '-' . $anggota->nama . '-' . $anggota->kd_kartu . '.pdf';
 
-        $url =  url('kartu_anggota') . '/' . $umurangka . '-' . $anggota->nama . '.pdf';
+        $url =  url('kartu_anggota') . '/' . $umurangka . '-' . $anggota->no_xls . '-' . $anggota->nama . '-' . $anggota->kd_kartu . '.pdf';
 
         $anggota->update([
             'jml_cetak' => $anggota->jml_cetak + 1
@@ -218,9 +218,9 @@ class MainController extends Controller
 
 
         // Output the modified PDF
-        $file_path = public_path('kartu_anggota/') . $umurangka . '-' . $anggota->nama . '.pdf';
+        $file_path = public_path('kartu_anggota/') . $umurangka . '-' . $anggota->no_xls . '-' . $anggota->nama . '-' . $anggota->kd_kartu . '.pdf';
 
-        $url =  url('kartu_anggota') . '/' . $umurangka . '-' . $anggota->nama . '.pdf';
+        $url =  url('kartu_anggota') . '/' . $umurangka . '-' . $anggota->no_xls . '-' . $anggota->nama . '-' . $anggota->kd_kartu . '.pdf';
 
 
         return view('pdfviewer', compact('url'));
