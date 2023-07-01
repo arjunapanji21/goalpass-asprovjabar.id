@@ -23,7 +23,7 @@
         @inertia
 
         @env ('local')
-            <script src="{{mix('js/bundle.js')}}"></script>
+            
         @endenv
     </body>
 </html>

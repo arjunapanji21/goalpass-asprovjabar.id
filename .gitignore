@@ -1,5 +1,9 @@
 /node_modules
 /public/hot
+/public/kartu_anggota
+/public/foto_anggota
+/public/fm
+/public
 /public/storage
 /storage/*.key
 /vendor

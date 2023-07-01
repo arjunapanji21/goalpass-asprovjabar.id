@@ -182,7 +182,7 @@
                     :class="{ 'btn-active': anggota.active }"
                     v-for="(anggota, index) in master.anggota.links"
                     :key="index"
-                    :href="anggota.url + '&search=' + master.search"
+                    :href="anggota.url + '&search=' + (master.search || '')"
                     v-html="anggota.label"
                 ></Link>
             </div>
@@ -200,14 +200,18 @@ export default {
         auth: Object,
         master: Object,
     },
-    setup() {
+    setup(props) {
+       
         const formCari = useForm({
-            search: null,
+             search: props.master.search || null,
         });
+
+
         return {
             moment,
             formCari,
         };
+        
     },
     watch: {
         "formCari.search"(baru) {
@@ -217,7 +221,7 @@ export default {
             });
         },
     },
-    methods: {},
+   
 };
 </script>
 <style lang=""></style>

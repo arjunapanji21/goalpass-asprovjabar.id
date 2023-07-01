@@ -1,6 +1,6 @@
 <template lang="" class="">
     <teleport to="head">
-        <title>PSSI JATIM | Landing Page</title>
+        <title>PSSI JABAR | Landing Page</title>
     </teleport>
     <div class="drawer drawer-end">
         <input id="my-drawer-4" type="checkbox" class="drawer-toggle" />

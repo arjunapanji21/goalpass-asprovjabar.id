@@ -1,6 +1,6 @@
 <template lang="">
     <teleport to='head'>
-        <title>PSSI JATIM | Login</title>
+        <title>PSSI JABAR | Login</title>
     </teleport>
     <div class="hero min-h-screen bg-slate-100">
         <div class="hero-content flex-col md:flex-row-reverse">
