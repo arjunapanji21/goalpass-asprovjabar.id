@@ -50,17 +50,22 @@ class MainController extends Controller
     }
     public function anggota(Request $request)
     {
-        $anggota = Anggota::orderBy('id', 'asc')
-            ->where('nik', 'like', "%{$request['search']}%")
-            ->orWhere('nama', 'like', "%{$request['search']}%")
-            ->orWhere('klub', 'like', "%{$request['search']}%")
-            ->orWhere('umur', 'like', "%{$request['search']}%")
-            ->orWhere('kd_kartu', 'like', "%{$request['search']}%")
-            ->orWhere('kota_kab', 'like', "%{$request['search']}%")
-            ->paginate(10);
+        $anggota = Anggota::orderBy('id', 'asc');
+        if ($request['filter'] == "nama") {
+            $anggota->where('nama', 'like', "%{$request['search']}%");
+        } else if ($request['filter'] == "kd_kartu") {
+            $anggota->where('kd_kartu', 'like', "%{$request['search']}%");
+        } else if ($request['filter'] == "klub") {
+            $anggota->where('klub', 'like', "%{$request['search']}%");
+        }
+        if ($request['umur'] != null) {
+            $anggota->where('umur', 'like', "%{$request['umur']}%");
+        }
         $master = [
             'title' => 'Anggota',
-            'anggota' => $anggota,
+            'anggota' => $anggota->paginate(10),
+            'filter' => $request['filter'] != "nama" ? $request['filter'] : "nama",
+            'umur' => $request['umur'] != null ? $request['umur'] : null,
             'search' => $request['search'] != null ? $request['search'] : null,
         ];
         if (auth()->user()->role == "Super Admin") {

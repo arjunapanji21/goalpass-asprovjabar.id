@@ -30,12 +30,28 @@
         <div>
             <div class="form-control py-2 w-full">
                 <div class="input-group">
+                    <select
+                        v-model="formCari.filter"
+                        class="select select-bordered"
+                    >
+                        <option value="nama">Filter By: Nama</option>
+                        <option value="kd_kartu">Filter By: No. Anggota</option>
+                        <option value="klub">Filter By: Klub</option>
+                    </select>
                     <input
                         type="text"
                         placeholder="Search…"
                         class="input input-bordered w-full"
                         v-model="formCari.search"
                     />
+                    <select
+                        v-model="formCari.umur"
+                        class="select select-bordered"
+                    >
+                        <option :value="null">Semua Umur</option>
+                        <option value="u-13">U-13</option>
+                        <option value="u-15">U-15</option>
+                    </select>
                     <button class="btn btn-square btn-primary">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +198,15 @@
                     :class="{ 'btn-active': anggota.active }"
                     v-for="(anggota, index) in master.anggota.links"
                     :key="index"
-                    :href="anggota.url + '&search=' + (master.search || '')"
+                    :href="
+                        anggota.url +
+                        '&filter=' +
+                        (master.filter || '') +
+                        '&search=' +
+                        (master.search || '') +
+                        '&umur=' +
+                        (master.umur || '')
+                    "
                     v-html="anggota.label"
                 ></Link>
             </div>
@@ -201,17 +225,16 @@ export default {
         master: Object,
     },
     setup(props) {
-       
         const formCari = useForm({
-             search: props.master.search || null,
+            filter: props.master.filter || "nama",
+            search: props.master.search || null,
+            umur: props.master.umur || null,
         });
-
 
         return {
             moment,
             formCari,
         };
-        
     },
     watch: {
         "formCari.search"(baru) {
@@ -220,8 +243,13 @@ export default {
                 preserveScroll: true,
             });
         },
+        "formCari.umur"(baru) {
+            this.formCari.get(route("anggota"), {
+                preserveState: true,
+                preserveScroll: true,
+            });
+        },
     },
-   
 };
 </script>
 <style lang=""></style>
