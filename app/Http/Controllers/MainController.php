@@ -57,7 +57,7 @@ class MainController extends Controller
             ->orWhere('umur', 'like', "%{$request['search']}%")
             ->orWhere('kd_kartu', 'like', "%{$request['search']}%")
             ->orWhere('kota_kab', 'like', "%{$request['search']}%")
-            ->paginate(50);
+            ->paginate(10);
         $master = [
             'title' => 'Anggota',
             'anggota' => $anggota,
