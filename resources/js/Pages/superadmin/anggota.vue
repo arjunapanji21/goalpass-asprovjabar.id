@@ -51,6 +51,7 @@
                         <option :value="null">Semua Umur</option>
                         <option value="u-13">U-13</option>
                         <option value="u-15">U-15</option>
+                        <option value="u-17">U-17</option>
                     </select>
                     <button class="btn btn-square btn-primary">
                         <svg
