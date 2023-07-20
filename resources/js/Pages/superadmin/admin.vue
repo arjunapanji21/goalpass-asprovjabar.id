@@ -25,7 +25,7 @@
             <div class="divider w-full"></div>
         </div>
         <div>
-            <div class="overflow-x-auto shadow">
+            <div class="overflow-x-auto bg-base-100 rounded-lg shadow">
                 <table class="table table-compact w-full">
                     <!-- head -->
                     <thead>

@@ -28,7 +28,7 @@
         "vue-loader": "^17.0.0"
     },
     "dependencies": {
-        "apexcharts": "^3.36.3",
+        "apexcharts": "^3.41.0",
         "moment": "^2.29.4",
         "pdfjs-dist": "^3.7.107",
         "viewerjs": "^1.11.3",

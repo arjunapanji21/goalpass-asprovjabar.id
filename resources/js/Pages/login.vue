@@ -8,7 +8,7 @@
                 <img
                     src="../../../public/images/logo_goalpass.png"
                     alt="logo_goalpass.png"
-                    class="mx-auto max-w-md p-10"
+                    class="mx-auto max-w-xs md:max-w-md p-10"
                 />
             </div>
             <div

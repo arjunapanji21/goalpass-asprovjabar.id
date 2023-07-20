@@ -4,6 +4,26 @@
             <div class="text-2xl font-semibold text-center">Beranda</div>
             <div class="divider w-full"></div>
         </div>
+
+        <div
+            class="w-full stats stats-vertical lg:stats-horizontal text-center shadow mb-2"
+        >
+            <div class="stat">
+                <div class="stat-value text-primary">U-13</div>
+                <div class="stat-title text-xl">{{ master.u13 }} Orang</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-value text-primary">U-15</div>
+                <div class="stat-title text-xl">{{ master.u15 }} Orang</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-value text-primary">U-17</div>
+                <div class="stat-title text-xl">{{ master.u17 }} Orang</div>
+            </div>
+        </div>
+
         <div class="block md:flex">
             <div class="m-2 card md:w-6/12 bg-base-100 shadow">
                 <div class="card-body">
@@ -24,7 +44,9 @@
                         </div>
                     </div>
                     <div class="text-center">Jumlah Anggota</div>
-                    <div class="text-center text-5xl font-bold">{{master.anggota}}</div>
+                    <div class="text-center text-5xl font-bold">
+                        {{ master.anggota }}
+                    </div>
                     <div class="card-actions justify-center pt-2">
                         <Link
                             :href="route('anggota')"
@@ -74,6 +96,7 @@
             </div>
             <div class="h-20 md:hidden"></div>
         </div>
+        <div class="grid grid-cols-3 gap-3"></div>
     </div>
 </template>
 <script>
@@ -82,7 +105,7 @@ export default {
     layout: layout,
     props: {
         auth: Object,
-        master: Object
+        master: Object,
     },
 };
 </script>

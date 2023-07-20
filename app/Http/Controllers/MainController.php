@@ -25,6 +25,9 @@ class MainController extends Controller
         $master = [
             'title' => 'Beranda',
             'anggota' => count(Anggota::all()),
+            'u13' => count(Anggota::where('umur', 'like', '%U-13%')->get()),
+            'u15' => count(Anggota::where('umur', 'like', '%U-15%')->get()),
+            'u17' => count(Anggota::where('umur', 'like', '%U-17%')->get()),
         ];
         if (auth()->user()->role == "Super Admin") {
             return inertia()->render('superadmin/home', compact('master'));
@@ -36,10 +39,25 @@ class MainController extends Controller
     }
     public function anggota_profile($kd_kartu)
     {
+        $anggota = Anggota::where('kd_kartu', $kd_kartu)->get()->first();
+        if ($anggota->umur == "U-9") {
+            $templateKartu = public_path('template_kartu/u-9.pdf');
+        } else if ($anggota->umur == "U-11") {
+            $templateKartu = public_path('template_kartu/u-11.pdf');
+        } else if ($anggota->umur == "U-13") {
+            $templateKartu = public_path('template_kartu/u-13.pdf');
+        } else if ($anggota->umur == "U-15") {
+            $templateKartu = public_path('template_kartu/u-15.pdf');
+        } else if ($anggota->umur == "U-17") {
+            $templateKartu = public_path('template_kartu/u-17.pdf');
+        }
+
         $master = [
             'title' => 'Profil Anggota',
-            'anggota' => Anggota::where('kd_kartu', $kd_kartu)->get()->first(),
+            'anggota' => $anggota,
+            'template_kartu' => $templateKartu,
         ];
+
         if (auth()->user()->role == "Super Admin") {
             return inertia()->render('superadmin/anggota_profile', compact('master'));
         } else if (auth()->user()->role == "Admin") {
@@ -63,7 +81,7 @@ class MainController extends Controller
         }
         $master = [
             'title' => 'Anggota',
-            'anggota' => $anggota->paginate(10),
+            'anggota' => $anggota->paginate(30),
             'filter' => $request['filter'] != "nama" ? $request['filter'] : "nama",
             'umur' => $request['umur'] != null ? $request['umur'] : null,
             'search' => $request['search'] != null ? $request['search'] : null,
@@ -214,21 +232,41 @@ class MainController extends Controller
 
     public function cekKartu($kd_kartu)
     {
-        $anggota = Anggota::where("kd_kartu", $kd_kartu)->get()->first();
+        // $anggota = Anggota::where("kd_kartu", $kd_kartu)->get()->first();
 
 
-        $umur = $anggota->umur;
-        $length = strlen($umur);
-        $umurangka = substr($umur, $length - 2);
+        // $umur = $anggota->umur;
+        // $length = strlen($umur);
+        // $umurangka = substr($umur, $length - 2);
 
 
-        // Output the modified PDF
-        $file_path = public_path('kartu_anggota/') . $umurangka . '-' . $anggota->no_xls . '-' . $anggota->nama . '-' . $anggota->kd_kartu . '.pdf';
+        // // Output the modified PDF
+        // $file_path = public_path('kartu_anggota/') . $umurangka . '-' . $anggota->no_xls . '-' . $anggota->nama . '-' . $anggota->kd_kartu . '.pdf';
 
-        $url =  url('kartu_anggota') . '/' . $umurangka . '-' . $anggota->no_xls . '-' . $anggota->nama . '-' . $anggota->kd_kartu . '.pdf';
+        // $url =  url('kartu_anggota') . '/' . $umurangka . '-' . $anggota->no_xls . '-' . $anggota->nama . '-' . $anggota->kd_kartu . '.pdf';
 
 
-        return view('pdfviewer', compact('url'));
+        // return view('pdfviewer', compact('url'));
+        $anggota = Anggota::where('kd_kartu', $kd_kartu)->get()->first();
+        if ($anggota->umur == "U-9") {
+            $templateKartu = public_path('template_kartu/u-9.pdf');
+        } else if ($anggota->umur == "U-11") {
+            $templateKartu = public_path('template_kartu/u-11.pdf');
+        } else if ($anggota->umur == "U-13") {
+            $templateKartu = public_path('template_kartu/u-13.pdf');
+        } else if ($anggota->umur == "U-15") {
+            $templateKartu = public_path('template_kartu/u-15.pdf');
+        } else if ($anggota->umur == "U-17") {
+            $templateKartu = public_path('template_kartu/u-17.pdf');
+        }
+
+        $master = [
+            'title' => 'Profil Anggota',
+            'anggota' => $anggota,
+            'template_kartu' => $templateKartu,
+        ];
+
+        return inertia()->render('anggota_profile_public', compact('master'));
     }
 
     public function generateQrCode($kd_kartu)

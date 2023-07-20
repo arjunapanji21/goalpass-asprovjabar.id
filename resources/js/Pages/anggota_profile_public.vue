@@ -1,5 +1,5 @@
 <template lang="">
-    <div>
+    <div class="bg-base-200 p-4">
         <div class="flex m-2 gap-4 items-center">
             <div
                 class="text-2xl w-[640px] md:w-[400px] xl:w-[320px] flex gap-2 font-semibold text-center"
@@ -10,16 +10,21 @@
         </div>
         <div>
             <div class="">
-                <div class="flex justify-center lg:justify-end">
-                    <div class="p-4 z-10">
-                        <img
-                            :src="
-                                '/foto_anggota/' +
-                                master.anggota.foto.replace(/’/g, '__')
-                            "
-                            alt="Foto Anggota"
-                            class="rounded-box shadow-lg lg:w-64 bg-base-100"
-                        />
+                <div class="flex justify-end">
+                    <div
+                        class="avatar rounded-full shadow-xl z-10 border-4 lg:border-8 border-primary mr-4 w-1/3 lg:w-1/5"
+                    >
+                        <div
+                            class="mask mask-circle rounded-full bg-base-100 border-8 border-base-100"
+                        >
+                            <img
+                                :src="
+                                    '/foto_anggota/' +
+                                    master.anggota.foto.replace(/’/g, '__')
+                                "
+                                alt="Foto Anggota"
+                            />
+                        </div>
                     </div>
                 </div>
                 <div class="card bg-base-100 -mt-7 lg:-mt-16">
@@ -180,7 +185,7 @@
                                 <div class="w-64 h-80 md:h-64">
                                     <div class="absolute">
                                         <img
-                                            src="../../../../public/images/lapangan.png"
+                                            src="../../../public/images/lapangan.png"
                                             alt="lapangan.png"
                                             width="240"
                                         />
@@ -527,21 +532,18 @@
                     </div>
                 </div>
             </div>
-            <div class="h-20 md:hidden"></div>
         </div>
     </div>
 </template>
 <script>
 import moment from "moment";
-import layout from "../superadmin/layout.vue";
-
+// import layout from "../superadmin/layout.vue";
 export default {
-    layout: layout,
+    // layout: layout,
     props: {
         auth: Object,
         master: Object,
     },
-    components: {},
     setup() {
         return {
             moment,
