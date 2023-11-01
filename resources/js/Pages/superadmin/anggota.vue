@@ -48,10 +48,11 @@
                         v-model="formCari.umur"
                         class="select select-bordered"
                     >
-                        <option :value="null">Semua Umur</option>
+                        <option value="all">Semua Umur</option>
                         <option value="u-13">U-13</option>
                         <option value="u-15">U-15</option>
                         <option value="u-17">U-17</option>
+                        <option value="SENIOR">SENIOR</option>
                     </select>
                     <button class="btn btn-square btn-primary">
                         <svg
@@ -101,13 +102,30 @@
                                         <div
                                             class="mask mask-squircle w-12 h-12"
                                         >
-                                            <img
+                                            <img v-if="anggota.foto.includes(/’/g)"
                                                 :src="
                                                     '/foto_anggota/' +
                                                     anggota.foto.replace(
                                                         /’/g,
                                                         '__'
                                                     )
+                                                "
+                                                alt="Foto Anggota"
+                                            />
+                                            <img v-if="anggota.foto.includes(/'/g)"
+                                                :src="
+                                                    '/foto_anggota/' +
+                                                    anggota.foto.replace(
+                                                        /'/g,
+                                                        '__'
+                                                    )
+                                                "
+                                                alt="Foto Anggota"
+                                            />
+                                            <img v-else
+                                                :src="
+                                                    '/foto_anggota/' +
+                                                    anggota.foto
                                                 "
                                                 alt="Foto Anggota"
                                             />
@@ -263,7 +281,7 @@ export default {
         const formCari = useForm({
             filter: props.master.filter || "nama",
             search: props.master.search || null,
-            umur: props.master.umur || null,
+            umur: props.master.umur || "all",
         });
 
         return {

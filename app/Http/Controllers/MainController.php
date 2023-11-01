@@ -22,12 +22,30 @@ class MainController extends Controller
     }
     public function beranda()
     {
+        $wilayah = [];
+        $anggota = Anggota::all();
+        $u13 = Anggota::where('umur', 'like', '%U-13%')->get();
+        $u15 = Anggota::where('umur', 'like', '%U-15%')->get();
+        $u17 = Anggota::where('umur', 'like', '%U-17%')->get();
+        $senior = Anggota::where('umur', 'like', '%SENIOR%')->get();
+        foreach ($anggota->groupBy('kota_kab') as $key => $row) {
+            $data = [
+                'kota' => $key,
+                'u13' => isset($row->groupBy('umur')['U-13']) ? count($row->groupBy('umur')['U-13']) : 0,
+                'u15' => isset($row->groupBy('umur')['U-15']) ? count($row->groupBy('umur')['U-15']) : 0,
+                'u17' => isset($row->groupBy('umur')['U-17']) ? count($row->groupBy('umur')['U-17']) : 0,
+                'senior' => isset($row->groupBy('umur')['SENIOR']) ? count($row->groupBy('umur')['SENIOR']) : 0
+            ];
+            array_push($wilayah, $data);
+        }
         $master = [
             'title' => 'Beranda',
-            'anggota' => count(Anggota::all()),
-            'u13' => count(Anggota::where('umur', 'like', '%U-13%')->get()),
-            'u15' => count(Anggota::where('umur', 'like', '%U-15%')->get()),
-            'u17' => count(Anggota::where('umur', 'like', '%U-17%')->get()),
+            'anggota' => count($anggota),
+            'u13' => count($u13),
+            'u15' => count($u15),
+            'u17' => count($u17),
+            'senior' => count($senior),
+            'wilayah' => $wilayah
         ];
         if (auth()->user()->role == "Super Admin") {
             return inertia()->render('superadmin/home', compact('master'));
@@ -50,6 +68,8 @@ class MainController extends Controller
             $templateKartu = public_path('template_kartu/u-15.pdf');
         } else if ($anggota->umur == "U-17") {
             $templateKartu = public_path('template_kartu/u-17.pdf');
+        } else if ($anggota->umur == "SENIOR") {
+            $templateKartu = public_path('template_kartu/senior.pdf');
         }
 
         $master = [
@@ -76,14 +96,14 @@ class MainController extends Controller
         } else if ($request['filter'] == "klub") {
             $anggota->where('klub', 'like', "%{$request['search']}%");
         }
-        if ($request['umur'] != null) {
+        if ($request['umur'] != "all") {
             $anggota->where('umur', 'like', "%{$request['umur']}%");
         }
         $master = [
             'title' => 'Anggota',
             'anggota' => $anggota->paginate(30),
             'filter' => $request['filter'] != "nama" ? $request['filter'] : "nama",
-            'umur' => $request['umur'] != null ? $request['umur'] : null,
+            'umur' => $request['umur'] != "all" ? $request['umur'] : "all",
             'search' => $request['search'] != null ? $request['search'] : null,
         ];
         if (auth()->user()->role == "Super Admin") {
@@ -137,6 +157,8 @@ class MainController extends Controller
             $existingPdfPath = public_path('template_kartu/u-15.pdf');
         } else if ($anggota->umur == "U-17") {
             $existingPdfPath = public_path('template_kartu/u-17.pdf');
+        } else if ($anggota->umur == "SENIOR") {
+            $existingPdfPath = public_path('template_kartu/senior.pdf');
         }
 
         // Set the source file
@@ -258,6 +280,8 @@ class MainController extends Controller
             $templateKartu = public_path('template_kartu/u-15.pdf');
         } else if ($anggota->umur == "U-17") {
             $templateKartu = public_path('template_kartu/u-17.pdf');
+        } else if ($anggota->umur == "SENIOR") {
+            $templateKartu = public_path('template_kartu/senior.pdf');
         }
 
         $master = [

@@ -10,25 +10,15 @@
         </div>
         <div>
             <div class="">
-                <div class="flex justify-center lg:justify-end">
-                    <div class="p-4 z-10">
-                        <img
-                            :src="
-                                '/foto_anggota/' +
-                                master.anggota.foto.replace(/’/g, '__')
-                            "
-                            alt="Foto Anggota"
-                            class="rounded-box shadow-lg lg:w-64 bg-base-100"
-                        />
-                    </div>
-                </div>
-                <div class="card bg-base-100 -mt-7 lg:-mt-16">
-                    <div class="card-body">
+                <div
+                    class="flex flex-col-reverse lg:flex-row gap-4 justify-center"
+                >
+                    <div class="card w-full">
                         <div
-                            class="flex flex-col lg:flex-row lg:items-end gap-2"
+                            class="flex mx-4 flex-col lg:flex-row lg:items-end gap-2"
                         >
                             <div
-                                class="card-title text-2xl lg:text-4xl font-bold text-primary"
+                                class="card-title mt-4 text-2xl lg:text-4xl font-bold text-primary"
                             >
                                 {{ master.anggota.nama }}
                             </div>
@@ -40,64 +30,99 @@
                                 }}]
                             </div>
                         </div>
-                        <div class="block lg:flex">
-                            <div
-                                class="font-bold text-primary-focus text-xl border-2 border-primary w-max p-2 rounded"
-                            >
-                                {{ master.anggota.kd_kartu }}
-                            </div>
-                            <div class="divider lg:divider-horizontal"></div>
-                            <div>
+                        <div class="py-2"></div>
+                        <div
+                            class="font-bold text-primary-content text-xl bg-primary mx-4 w-max px-4 py-2 rounded"
+                        >
+                            {{ master.anggota.kd_kartu }}
+                        </div>
+                        <div class="py-5"></div>
+                        <div class="card-body rounded-box bg-base-100 shadow">
+                            <div class="block lg:flex">
                                 <div>
-                                    <span
-                                        class="uppercase font-bold text-primary"
-                                        >Lahir Pada:</span
-                                    >
-                                    {{
-                                        moment(master.anggota.tgl_lahir).format(
-                                            "DD MMMM YYYY"
-                                        )
-                                    }}
+                                    <div>
+                                        <span
+                                            class="uppercase font-bold text-primary"
+                                            >Lahir Pada:</span
+                                        >
+                                        {{
+                                            moment(
+                                                master.anggota.tgl_lahir
+                                            ).format("DD MMMM YYYY")
+                                        }}
+                                    </div>
+                                    <div>
+                                        <span
+                                            class="uppercase font-bold text-primary"
+                                            >Kota/Kabupaten:</span
+                                        >
+                                        {{ master.anggota.kota_kab }}
+                                    </div>
                                 </div>
+                                <div
+                                    class="divider lg:divider-horizontal"
+                                ></div>
                                 <div>
-                                    <span
-                                        class="uppercase font-bold text-primary"
-                                        >Kota/Kabupaten:</span
-                                    >
-                                    {{ master.anggota.kota_kab }}
+                                    <div>
+                                        <span
+                                            class="uppercase font-bold text-primary"
+                                            >Tinggi Badan:</span
+                                        >
+                                        n/a
+                                    </div>
+                                    <div>
+                                        <span
+                                            class="uppercase font-bold text-primary"
+                                            >Berat Badan:</span
+                                        >
+                                        n/a
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="divider lg:divider-horizontal"></div>
-                            <div>
+                                <div
+                                    class="divider lg:divider-horizontal"
+                                ></div>
                                 <div>
-                                    <span
-                                        class="uppercase font-bold text-primary"
-                                        >Tinggi Badan:</span
-                                    >
-                                    n/a
-                                </div>
-                                <div>
-                                    <span
-                                        class="uppercase font-bold text-primary"
-                                        >Berat Badan:</span
-                                    >
-                                    n/a
-                                </div>
-                            </div>
-                            <div class="divider lg:divider-horizontal"></div>
-                            <div>
-                                <div>
-                                    <span
-                                        class="uppercase font-bold text-primary"
-                                        >Kaki Terbaik:</span
-                                    >
-                                    n/a
+                                    <div>
+                                        <span
+                                            class="uppercase font-bold text-primary"
+                                            >Kaki Terbaik:</span
+                                        >
+                                        n/a
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div
+                        class="p-3 mx-auto bg-base-100 rounded-box shadow lg:w-72"
+                    >
+                        <img v-if="master.anggota.foto.includes(/’/g)"
+                            :src="
+                                '/foto_anggota/' +
+                                master.anggota.foto.replace(/’/g, '__')
+                            "
+                            alt="Foto Anggota"
+                            class="rounded-box"
+                        />
+                        <img v-if="master.anggota.foto.includes(/'/g)"
+                            :src="
+                                '/foto_anggota/' +
+                                master.anggota.foto.replace(/'/g, '__')
+                            "
+                            alt="Foto Anggota"
+                            class="rounded-box"
+                        />
+                        <img v-else
+                            :src="
+                                '/foto_anggota/' +
+                                master.anggota.foto
+                            "
+                            alt="Foto Anggota"
+                            class="rounded-box"
+                        />
+                    </div>
                 </div>
-                <div class="card bg-base-100 my-4">
+                <div class="card bg-base-100 my-4 shadow">
                     <div class="card-body">
                         <div
                             class="text-xl font-bold mb-4 text-center text-primary"
@@ -167,7 +192,7 @@
                     </div>
                 </div>
                 <div class="grid lg:grid-cols-2 lg:gap-4">
-                    <div class="card bg-base-100 my-4">
+                    <div class="card bg-base-100 my-4 shadow">
                         <div class="card-body">
                             <div
                                 class="text-xl font-bold mb-4 text-center text-primary"
@@ -277,7 +302,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card w-full bg-base-100 my-4">
+                    <div class="card w-full bg-base-100 my-4 shadow">
                         <div class="card-body">
                             <div
                                 class="text-xl font-bold mb-4 text-center text-primary"
@@ -506,7 +531,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="card bg-base-100 my-4">
+                <div class="card bg-base-100 my-4 shadow">
+                    <div class="card-body">
+                        <div id="chart">
+                            <apexchart
+                                type="radar"
+                                height="350"
+                                :options="chartOptions"
+                                :series="series"
+                            ></apexchart>
+                        </div>
+                    </div>
+                </div>
+                <div class="card bg-base-100 my-4 shadow">
                     <div class="card-body">
                         <div
                             class="text-xl font-bold mb-4 text-center text-primary"
@@ -516,7 +553,7 @@
                         <div class="text-center">No Data</div>
                     </div>
                 </div>
-                <div class="card bg-base-100 my-4">
+                <div class="card bg-base-100 my-4 shadow">
                     <div class="card-body">
                         <div
                             class="text-xl font-bold mb-4 text-center text-primary"
@@ -534,6 +571,7 @@
 <script>
 import moment from "moment";
 import layout from "../superadmin/layout.vue";
+import VueApexCharts from "vue3-apexcharts";
 
 export default {
     layout: layout,
@@ -541,7 +579,38 @@ export default {
         auth: Object,
         master: Object,
     },
-    components: {},
+    components: {
+        apexchart: VueApexCharts,
+    },
+    data() {
+        return {
+            series: [
+                {
+                    name: "Series 1",
+                    data: [80, 50, 30, 40, 100, 20],
+                },
+            ],
+            chartOptions: {
+                chart: {
+                    height: 350,
+                    type: "radar",
+                },
+                title: {
+                    text: "Basic Radar Chart",
+                },
+                xaxis: {
+                    categories: [
+                        "January",
+                        "February",
+                        "March",
+                        "April",
+                        "May",
+                        "June",
+                    ],
+                },
+            },
+        };
+    },
     setup() {
         return {
             moment,

@@ -32,6 +32,6 @@
         "moment": "^2.29.4",
         "pdfjs-dist": "^3.7.107",
         "viewerjs": "^1.11.3",
-        "vue3-apexcharts": "^1.4.1"
+        "vue3-apexcharts": "^1.4.4"
     }
 }

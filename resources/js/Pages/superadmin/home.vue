@@ -4,26 +4,6 @@
             <div class="text-2xl font-semibold text-center">Beranda</div>
             <div class="divider w-full"></div>
         </div>
-
-        <div
-            class="w-full stats stats-vertical lg:stats-horizontal text-center shadow mb-2"
-        >
-            <div class="stat">
-                <div class="stat-value text-primary">U-13</div>
-                <div class="stat-title text-xl">{{ master.u13 }} Orang</div>
-            </div>
-
-            <div class="stat">
-                <div class="stat-value text-primary">U-15</div>
-                <div class="stat-title text-xl">{{ master.u15 }} Orang</div>
-            </div>
-
-            <div class="stat">
-                <div class="stat-value text-primary">U-17</div>
-                <div class="stat-title text-xl">{{ master.u17 }} Orang</div>
-            </div>
-        </div>
-
         <div class="block md:flex">
             <div class="m-2 card md:w-6/12 bg-base-100 shadow">
                 <div class="card-body">
@@ -96,7 +76,71 @@
             </div>
             <div class="h-20 md:hidden"></div>
         </div>
-        <div class="grid grid-cols-3 gap-3"></div>
+        <div
+            class="w-full stats stats-vertical lg:stats-horizontal text-center shadow my-2"
+        >
+            <div class="stat">
+                <div class="stat-value text-primary">U-13</div>
+                <div class="stat-title text-xl">{{ master.u13 }} Pemain</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-value text-primary">U-15</div>
+                <div class="stat-title text-xl">{{ master.u15 }} Pemain</div>
+            </div>
+
+            <div class="stat">
+                <div class="stat-value text-primary">U-17</div>
+                <div class="stat-title text-xl">{{ master.u17 }} Pemain</div>
+            </div>
+        </div>
+        <div class="overflow-auto my-2">
+            <table class="table shadow bg-base-100">
+                <thead>
+                    <tr class="text-center">
+                        <th colspan="6">
+                            Jumlah Pemain Berdasarkan Kabupaten/Kota
+                        </th>
+                    </tr>
+                    <tr class="bg-primary text-primary-content">
+                        <th></th>
+                        <th>Kabupaten/Kota</th>
+                        <th class="text-right">U-13</th>
+                        <th class="text-right">U-15</th>
+                        <th class="text-right">U-17</th>
+                        <th class="text-right">Total Pemain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                        class="hover"
+                        v-for="(item, index) in master.wilayah"
+                        :key="index"
+                    >
+                        <td class="text-center">{{ index + 1 }}</td>
+                        <td>{{ item.kota }}</td>
+                        <td class="text-right">{{ item.u13 }}</td>
+                        <td class="text-right">{{ item.u15 }}</td>
+                        <td class="text-right">{{ item.u17 }}</td>
+                        <td class="text-right">
+                            {{ item.u13 + item.u15 + item.u17 }} Pemain
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="bg-primary text-primary-content">
+                        <th></th>
+                        <th>Total Keseluruhan Pemain</th>
+                        <th class="text-right">{{ master.u13 }}</th>
+                        <th class="text-right">{{ master.u15 }}</th>
+                        <th class="text-right">{{ master.u17 }}</th>
+                        <th class="text-right">
+                            {{ master.u13 + master.u15 + master.u17 }} Pemain
+                        </th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </template>
 <script>
